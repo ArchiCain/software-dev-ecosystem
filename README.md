@@ -13,6 +13,8 @@ This project is designed to provide a scalable and reproducible development envi
 
 ## Setting Up the Development Environment
 
+## TODO: include nix installation instructions
+
 To set up the environment, follow these steps:
 
 1. **Enter the Nix environment**:
