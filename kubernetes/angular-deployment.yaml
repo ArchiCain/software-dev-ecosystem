@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rules-engine-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rules-engine-ui
+  template:
+    metadata:
+      labels:
+        app: rules-engine-ui
+    spec:
+      containers:
+      - name: rules-engine-ui
+        image: tryondirect/rules-engine-ui:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"    # Minimum memory guaranteed for the container (64MiB)
+            cpu: "250m"       # Minimum CPU guaranteed for the container (250 milli-CPU, which is 25% of a CPU core)
+          limits:
+            memory: "128Mi"   # Maximum memory allowed for the container (128MiB)
+            cpu: "500m"       # Maximum CPU allowed for the container (500 milli-CPU, which is 50% of a CPU core)

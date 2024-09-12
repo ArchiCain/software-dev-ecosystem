@@ -2,8 +2,12 @@
 
 pkgs.mkShell {
   buildInputs = [
-    pkgs.nodejs  # Install the latest version of NodeJs
-    pkgs.yarn
+    pkgs.nodejs_20        # Install the latest version of NodeJs
+    pkgs.yarn             # Yarn for package management
+    pkgs.docker           # Docker for containerization
+    pkgs.kubectl          # Kubernetes CLI tool
+    pkgs.kubernetes-helm  # Helm, a Kubernetes package manager
+    pkgs.minikube         # Minikube for running a local Kubernetes cluster
   ];
 
   # Automatically install the Angular CLI via Yarn in this environment

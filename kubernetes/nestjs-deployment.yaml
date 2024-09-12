@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rules-engine-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rules-engine-api
+  template:
+    metadata:
+      labels:
+        app: rules-engine-api
+    spec:
+      containers:
+      - name: rules-engine-api
+        image: tryondirect/rules-engine-api:latest
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            memory: "128Mi"  # Minimum memory guaranteed for NestJS
+            cpu: "250m"      # Minimum CPU guaranteed (25% of a core)
+          limits:
+            memory: "256Mi"  # Maximum memory allowed for NestJS
+            cpu: "500m"      # Maximum CPU allowed (50% of a core)
