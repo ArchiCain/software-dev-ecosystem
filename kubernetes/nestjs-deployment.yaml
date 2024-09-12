@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: rules-engine-api
-        image: tryondirect/rules-engine-api:latest
+        image: rules-engine-api:latest
+        imagePullPolicy: IfNotPresent  # defaults to local image
         ports:
         - containerPort: 3000
         resources:

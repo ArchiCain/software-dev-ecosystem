@@ -5,4 +5,4 @@ RUN yarn install
 COPY . .
 RUN yarn build
 EXPOSE 80
-CMD [ "npx", "http-server", "dist/rules-engine-ui", "-p", "80" ]
+CMD [ "npx", "http-server", "dist/rules-engine-ui/browser", "-p", "80" ]

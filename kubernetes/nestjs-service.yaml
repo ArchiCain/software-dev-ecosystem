@@ -3,9 +3,9 @@ kind: Service
 metadata:
   name: rules-engine-api-service
 spec:
-  type: NodePort
-  ports:
-    - port: 3000
-      targetPort: 3000
+  type: ClusterIP  # Ensures it's accessible within the cluster
   selector:
     app: rules-engine-api
+  ports:
+    - port: 3000       # The port the service exposes
+      targetPort: 3000  # The port the NestJS app is listening on
