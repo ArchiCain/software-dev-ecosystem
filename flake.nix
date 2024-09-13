@@ -12,6 +12,7 @@
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = import nixpkgs {
         inherit system;
+        config.allowUnfree = true;
       };
     in
       with pkgs; {
@@ -23,6 +24,7 @@
             kubectl # Kubernetes CLI tool
             kubernetes-helm # Helm, a Kubernetes package manager
             minikube # Minikube for running a local Kubernetes cluster
+            terraform # Infrustructure-as-Code (IaC) tool
           ];
           shellHook = ''
             # Ensure Angular CLI is installed
