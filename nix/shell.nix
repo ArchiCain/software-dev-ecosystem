@@ -12,6 +12,11 @@ pkgs.mkShell {
 
   # Automatically install the Angular CLI via Yarn in this environment
   shellHook = ''
+    # Enable Minikube Ingress if not already enabled
+    if ! minikube addons list | grep -q 'ingress: enabled'; then
+      minikube addons enable ingress
+    fi
+
     # Ensure Angular CLI is installed
     if ! command -v ng > /dev/null; then
       yarn global add @angular/cli
