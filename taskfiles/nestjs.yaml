@@ -1,0 +1,9 @@
+version: '3'
+
+tasks:
+  build-rules-engine-api:
+    desc: "Build the docker image for rules engine ui"
+    cmds:
+      - docker build -t rules-engine-api:latest ./nestjs/rules-engine-api
+      - task kubernetes:apply
+      - kubectl rollout restart deployment rules-engine-api

@@ -7,11 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class AppApiService {
 
-  private apiUrl = 'http://127.0.0.1:30001';  // Base URL of NestJS API service
+  private apiUrl = 'http://rules-engine-api.traefik.me';
 
   constructor(private http: HttpClient) { }
 
   getHelloMessage(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/`);
+    return this.http.get(`${this.apiUrl}/`, { responseType: 'text' });
   }
 }
