@@ -17,13 +17,6 @@ This project is designed to provide a scalable and reproducible development envi
 
 To set up the environment, follow these steps:
 
-1. **Enter the Nix environment**:
-
-   The `shell.nix` file is located in the `nix/` directory. Navigate to that directory and run `nix-shell` to activate the environment:
-
-   ```bash
-   cd nix
-   nix-shell
-   ```
-
-   This will load all required dependencies for the project, such as Node.js, Yarn, and Angular CLI.
+1. **TODO: document installation of direnv**
+2. **TODO: document setup direnv allow**
+3. **TODO: document docker desktop and enabling k8s**

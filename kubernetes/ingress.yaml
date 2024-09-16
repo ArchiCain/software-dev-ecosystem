@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: app-ingress
+  name: ecosystem-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-  - host: "minikube.local"
+  - host: "rules-engine-ui.traefik.me"
     http:
       paths:
       - path: /
@@ -16,7 +16,10 @@ spec:
             name: rules-engine-ui-service
             port:
               number: 80
-      - path: /api
+  - host: "rules-engine-api.traefik.me"
+    http:
+      paths:
+      - path: /
         pathType: Prefix
         backend:
           service:

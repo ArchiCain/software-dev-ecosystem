@@ -23,8 +23,8 @@
             docker # Docker for containerization
             kubectl # Kubernetes CLI tool
             kubernetes-helm # Helm, a Kubernetes package manager
-            minikube # Minikube for running a local Kubernetes cluster
             terraform # Infrustructure-as-Code (IaC) tool
+            go-task # Task for common commands
           ];
           shellHook = ''
             # Ensure Angular CLI is installed

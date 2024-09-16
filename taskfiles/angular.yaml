@@ -1,0 +1,9 @@
+version: '3'
+
+tasks:
+  build-rules-engine-ui:
+    desc: "Build the docker image for rules engine ui"
+    cmds:
+      - docker build -t rules-engine-ui:latest ./angular/rules-engine-ui
+      - task kubernetes:apply
+      - kubectl rollout restart deployment rules-engine-ui

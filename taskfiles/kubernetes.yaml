@@ -1,0 +1,19 @@
+version: '3'
+
+tasks:
+  traefik-install:
+    desc: "Install Traefik Ingress Controller"
+    cmds:
+      - helm repo add traefik https://traefik.github.io/charts
+      - helm repo update
+      - helm install traefik traefik/traefik
+
+  apply:
+    desc: "Apply Kubernetes resources"
+    cmds:
+      - kubectl apply -f kubernetes/
+  
+  delete:
+    desc: "Delete Kubernetes resources"
+    cmds:
+      - kubectl delete -f kubernetes/
