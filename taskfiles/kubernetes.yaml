@@ -17,3 +17,8 @@ tasks:
     desc: "Delete Kubernetes resources"
     cmds:
       - kubectl delete -f kubernetes/
+
+  tilt:up:
+    desc: "Start Tilt using the Tiltfile in the kubernetes directory"
+    cmds:
+      - tilt up --file kubernetes/Tiltfile

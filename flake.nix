@@ -25,6 +25,7 @@
             kubernetes-helm # Helm, a Kubernetes package manager
             terraform # Infrustructure-as-Code (IaC) tool
             go-task # Task for common commands
+            tilt # Add Tilt for Kubernetes dev workflow
           ];
           shellHook = ''
             # Ensure Angular CLI is installed
