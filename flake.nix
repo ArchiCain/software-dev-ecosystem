@@ -26,6 +26,7 @@
             terraform # Infrustructure-as-Code (IaC) tool
             go-task # Task for common commands
             tilt # Add Tilt for Kubernetes dev workflow
+            deploy-rs # Tool used to deploy Flakes to Nixos remote hosts
           ];
           shellHook = ''
             # Ensure Angular CLI is installed
