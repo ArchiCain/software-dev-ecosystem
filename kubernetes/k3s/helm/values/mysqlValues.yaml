@@ -1,0 +1,20 @@
+---
+storageClass: longhorn
+architecture: replication
+
+master:
+  persistence:
+    storageClass: longhorn
+    size: 5Gi
+
+slave:
+  replicaCount: 2
+  persistence:
+    storageClass: longhorn
+    size: 5Gi
+
+service:
+  enabled: true
+  annotations:
+    tailscale.com/expose: "true"  # Enable Tailscale for this service
+

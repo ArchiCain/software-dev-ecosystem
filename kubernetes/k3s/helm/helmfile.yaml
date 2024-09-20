@@ -1,0 +1,44 @@
+repositories:
+  - name: longhorn
+    url: https://charts.longhorn.io
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
+  - name: tailscale
+    url: https://pkgs.tailscale.com/helmcharts
+---
+releases:
+  # Distributed storage
+  - name: longhorn
+    namespace: longhorn-system
+    chart: longhorn/longhorn
+    version: 1.7.1
+  # Mysql 1 Master 2 slaves using Longhorn
+  - name: mysql
+    namespace: mysql
+    chart: bitnami/mysql
+    version: "11.1.17" # Choose the version you prefer
+    values:
+      - ./values/mysqlValues.yaml
+      - service:
+          annotations:
+            tailscale.com/expose: "true" # Enable Tailscale for this service
+  # Add Tailscale-operator to allow services to be exposed over tailnet
+  - name: tailscale-operator
+    namespace: tailscale
+    chart: tailscale/tailscale-operator
+    version: 1.74.1 # Make sure to use the latest version available
+    values:
+      - authKey: {{ env "TAILSCALE_AUTH_KEY" }}
+      - oauth:
+          clientId: {{ env "TAILSCALE_OAUTH_CLIENT_ID" }} # Set your OAuth client ID
+          clientSecret: {{ env "TAILSCALE_OAUTH_CLIENT_SECRET" }}
+  # Place Nginx on tailscale network
+  - name: nginx
+    namespace: nginx
+    chart: bitnami/nginx
+    version: "18.1.15" # Use the latest version available
+    values:
+      - values/nginxValues.yaml # Reference your custom values file if needed
+      - service:
+          annotations:
+            tailscale.com/expose: "true" # Enable Tailscale for this service
