@@ -18,15 +18,17 @@
       with pkgs; {
         devShells.default = mkShell {
           buildInputs = [
-            nodejs_20 # Install the latest version of NodeJs
-            yarn # Yarn for package management
+            deploy-rs # Tool used to deploy Flakes to Nixos remote hosts
             docker # Docker for containerization
+            go-task # Task for common commands
+            helmfile # Declarative spec for deploying Helm charts
+            k9s # Kubernetes CLI To Manage Your Clusters In Style
             kubectl # Kubernetes CLI tool
             kubernetes-helm # Helm, a Kubernetes package manager
+            nodejs_20 # Install the latest version of NodeJs
             terraform # Infrustructure-as-Code (IaC) tool
-            go-task # Task for common commands
             tilt # Add Tilt for Kubernetes dev workflow
-            deploy-rs # Tool used to deploy Flakes to Nixos remote hosts
+            yarn # Yarn for package management
           ];
           shellHook = ''
             # Ensure Angular CLI is installed
