@@ -7,11 +7,15 @@ import { Observable } from 'rxjs';
 })
 export class AppApiService {
 
-  private apiUrl = 'http://rules-engine-api.traefik.me';
+  private apiUrl = 'http://localhost/api/rules-engine';
 
   constructor(private http: HttpClient) { }
 
   getHelloMessage(): Observable<any> {
     return this.http.get(`${this.apiUrl}/`, { responseType: 'text' });
+  }
+
+  getHelloFromSecondEndpoint(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/second-endpoint`, { responseType: 'text' });
   }
 }

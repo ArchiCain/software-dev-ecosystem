@@ -35,12 +35,22 @@
               echo "Angular CLI is already installed."
             fi
 
+            # Ensure Angular Schematics is installed
+            if ! command -v schematics > /dev/null; then
+              yarn global add @angular-devkit/schematics-cli
+            fi
+
             # Ensure NestJS CLI is installed
             if ! command -v nest > /dev/null; then
               echo "NestJS CLI not found. Installing globally via Yarn..."
               yarn global add @nestjs/cli
             else
               echo "NestJS CLI is already installed."
+            fi
+
+            # Ensure NestJS Schematics is installed
+            if ! command -v nest-schematics > /dev/null; then
+              yarn global add @nestjs/schematics
             fi
 
             # Add Yarn global bin to PATH (for globally installed packages like ng and nest)

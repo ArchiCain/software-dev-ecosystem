@@ -7,3 +7,4 @@ tasks:
       - docker build -t rules-engine-api:latest ./nestjs/rules-engine-api
       - task kubernetes:apply
       - kubectl rollout restart deployment rules-engine-api
+

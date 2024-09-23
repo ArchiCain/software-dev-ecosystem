@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "baseHref": "/rules-engine-ui/",
             "outputPath": "dist/rules-engine-ui",
             "index": "src/index.html",
             "browser": "src/main.ts",

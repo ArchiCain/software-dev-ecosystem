@@ -1,0 +1,32 @@
+# Load the Kubernetes context and YAML files for services
+k8s_yaml('../angular/rules-engine-ui/deployment.yaml')
+k8s_yaml('../angular/rules-engine-ui/service.yaml')
+k8s_yaml('../angular/rules-engine-ui/ingress.yaml')
+k8s_yaml('../nestjs/rules-engine-api/deployment.yaml')
+k8s_yaml('../nestjs/rules-engine-api/service.yaml')
+k8s_yaml('../common/api-gateway.yaml')
+
+# Watch and automatically build & push the Angular app when files change
+docker_build(
+    'rules-engine-ui',        # Name of the Docker image
+    '../../angular/rules-engine-ui',     # Directory for the Angular app relative to the kubernetes dir
+    dockerfile='../../angular/rules-engine-ui/Dockerfile',  # Path to Dockerfile relative to kubernetes dir
+    live_update=[
+        sync('../../angular/rules-engine-ui/src', '/usr/src/app/src'),  # Sync local files into container
+        run('yarn build', trigger='../../angular/rules-engine-ui/src')  # Build when source code changes
+    ]
+)
+
+# Watch and automatically build & push the NestJS API when files change
+docker_build(
+    'rules-engine-api',       # Name of the Docker image
+    '../../nestjs/rules-engine-api',    # Directory for the NestJS API relative to the kubernetes dir
+    dockerfile='../../nestjs/rules-engine-api/Dockerfile',  # Path to Dockerfile relative to kubernetes dir
+    live_update=[
+        sync('../../nestjs/rules-engine-api/src', '/usr/src/app/src'),  # Sync local files into container
+        run('yarn start:dev', trigger='../../nestjs/rules-engine-api/src')  # Start dev server on source changes
+    ]
+)
+
+k8s_resource('rules-engine-ui')
+k8s_resource('rules-engine-api')

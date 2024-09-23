@@ -13,10 +13,12 @@ import { AsyncPipe } from '@angular/common';
 })
 export class AppComponent implements OnInit {
   helloMessage$?: Observable<any>;
+  secondEndpointHelloMessage$?: Observable<any>;
 
   constructor(private appApiService: AppApiService) {}
 
   ngOnInit(): void {
     this.helloMessage$ = this.appApiService.getHelloMessage();
+    this.secondEndpointHelloMessage$ = this.appApiService.getHelloFromSecondEndpoint();
   }
 }
