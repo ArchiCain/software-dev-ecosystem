@@ -1,8 +1,15 @@
 FROM node:20.16.0
 WORKDIR /usr/src/app
-COPY package.json ./
+
+# Install dependencies
+COPY package.json yarn.lock ./
 RUN yarn install
+
+# Copy source files
 COPY . .
-RUN yarn build
+
 EXPOSE 3000
-CMD ["node", "dist/main"]
+
+# Start the application using Nest CLI in watch mode
+# TODO: should probably not use a dev server for prod
+CMD ["yarn", "start:dev"]

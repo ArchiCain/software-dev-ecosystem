@@ -34,7 +34,6 @@ docker_build(
     dockerfile='../../nestjs/rules-engine-api/Dockerfile',  # Path to Dockerfile relative to kubernetes dir
     live_update=[
         sync('../../nestjs/rules-engine-api/src', '/usr/src/app/src'),  # Sync local files into container
-        run('yarn start:dev', trigger='../../nestjs/rules-engine-api/src')  # Start dev server on source changes
     ]
 )
 
