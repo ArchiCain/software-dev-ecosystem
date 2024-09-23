@@ -1,17 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: rules-engine-api-ingress
+  name: keycloak-ingress
 spec:
   ingressClassName: nginx
   rules:
-  - host: "localhost"
+  - host: "keycloak.localhost"
     http:
       paths:
-      - path: /rules-engine-api
+      - path: /
         pathType: Prefix
         backend:
           service:
-            name: rules-engine-api-service
+            name: keycloak
             port:
-              number: 3000
+              number: 8080

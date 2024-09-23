@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AppApiService {
 
-  private apiUrl = 'http://localhost/api/rules-engine';
+  private apiUrl = 'http://api.rules-engine.localhost';
 
   constructor(private http: HttpClient) { }
 

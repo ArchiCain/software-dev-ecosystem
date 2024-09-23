@@ -1,10 +1,20 @@
-# Load the Kubernetes context and YAML files for services
+# Load Angular Kubernetes config
 k8s_yaml('../angular/rules-engine-ui/deployment.yaml')
 k8s_yaml('../angular/rules-engine-ui/service.yaml')
 k8s_yaml('../angular/rules-engine-ui/ingress.yaml')
+
+# Load NestJs Kubernetes config
 k8s_yaml('../nestjs/rules-engine-api/deployment.yaml')
 k8s_yaml('../nestjs/rules-engine-api/service.yaml')
+
+# Load common Kubernetes config
 k8s_yaml('../common/api-gateway.yaml')
+
+# Load Keycloak Kubernetes config
+k8s_yaml('../keycloak/deployment.yaml')
+k8s_yaml('../keycloak/service.yaml')
+k8s_yaml('../keycloak/ingress.yaml')
+k8s_yaml('../keycloak/pvc.yaml')
 
 # Watch and automatically build & push the Angular app when files change
 docker_build(
@@ -28,5 +38,7 @@ docker_build(
     ]
 )
 
+# Define Kubernetes resources
 k8s_resource('rules-engine-ui')
 k8s_resource('rules-engine-api')
+k8s_resource('keycloak')

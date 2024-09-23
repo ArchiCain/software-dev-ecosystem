@@ -5,10 +5,10 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: "localhost"
+  - host: "api.rules-engine.localhost"
     http:
       paths:
-      - path: /api/rules-engine
+      - path: /
         pathType: Prefix
         backend:
           service:
