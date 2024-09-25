@@ -1,0 +1,4 @@
+**/node_modules
+**/dist
+apps/*
+!apps/api-1/**  # Include only the specific app directory we need

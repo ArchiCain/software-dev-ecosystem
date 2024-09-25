@@ -1,0 +1,4 @@
+**/node_modules
+**/dist
+projects/*
+!projects/web-app-2/**  # Include only the specific app directory we need

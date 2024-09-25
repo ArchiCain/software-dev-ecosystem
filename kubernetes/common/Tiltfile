@@ -1,11 +1,18 @@
 # Load Angular Kubernetes config
-k8s_yaml('../angular/rules-engine-ui/deployment.yaml')
-k8s_yaml('../angular/rules-engine-ui/service.yaml')
-k8s_yaml('../angular/rules-engine-ui/ingress.yaml')
+k8s_yaml('../angular/web-app-1/deployment.yaml')
+k8s_yaml('../angular/web-app-1/service.yaml')
+k8s_yaml('../angular/web-app-1/ingress.yaml')
+
+k8s_yaml('../angular/web-app-2/deployment.yaml')
+k8s_yaml('../angular/web-app-2/service.yaml')
+k8s_yaml('../angular/web-app-2/ingress.yaml')
 
 # Load NestJs Kubernetes config
-k8s_yaml('../nestjs/rules-engine-api/deployment.yaml')
-k8s_yaml('../nestjs/rules-engine-api/service.yaml')
+k8s_yaml('../nestjs/api-1/deployment.yaml')
+k8s_yaml('../nestjs/api-1/service.yaml')
+
+k8s_yaml('../nestjs/api-2/deployment.yaml')
+k8s_yaml('../nestjs/api-2/service.yaml')
 
 # Load common Kubernetes config
 k8s_yaml('../common/api-gateway.yaml')
@@ -16,28 +23,53 @@ k8s_yaml('../keycloak/service.yaml')
 k8s_yaml('../keycloak/ingress.yaml')
 k8s_yaml('../keycloak/pvc.yaml')
 
-# Watch and automatically build & push the Angular app when files change
+# Watch and automatically build & push the Angular web-app-1 when files change
 docker_build(
-    'rules-engine-ui',        # Name of the Docker image
-    '../../angular/rules-engine-ui',     # Directory for the Angular app relative to the kubernetes dir
-    dockerfile='../../angular/rules-engine-ui/Dockerfile',  # Path to Dockerfile relative to kubernetes dir
+    'web-app-1',        # Name of the Docker image
+    '../../angular',     # Build context at the Angular root
+    dockerfile='../../angular/projects/web-app-1/Dockerfile',  # Dockerfile for web-app-1
     live_update=[
-        sync('../../angular/rules-engine-ui/src', '/usr/src/app/src'),  # Sync local files into container
-        run('yarn build', trigger='../../angular/rules-engine-ui/src')  # Build when source code changes
+        sync('../../angular/projects/web-app-1/src', '/usr/src/app/src'),  # Sync app source files
+        run('yarn build web-app-1', trigger='../../angular/projects/web-app-1/src')  # Trigger build on changes
     ]
 )
 
-# Watch and automatically build & push the NestJS API when files change
+# Watch and automatically build & push the Angular web-app-2 when files change
 docker_build(
-    'rules-engine-api',       # Name of the Docker image
-    '../../nestjs/rules-engine-api',    # Directory for the NestJS API relative to the kubernetes dir
-    dockerfile='../../nestjs/rules-engine-api/Dockerfile',  # Path to Dockerfile relative to kubernetes dir
+    'web-app-2',        # Name of the Docker image
+    '../../angular',     # Build context at the Angular root
+    dockerfile='../../angular/projects/web-app-2/Dockerfile',  # Dockerfile for web-app-2
     live_update=[
-        sync('../../nestjs/rules-engine-api/src', '/usr/src/app/src'),  # Sync local files into container
+        sync('../../angular/projects/web-app-2/src', '/usr/src/app/src'),  # Sync app source files
+        run('yarn build web-app-2', trigger='../../angular/projects/web-app-2/src')  # Trigger build on changes
+    ]
+)
+
+# Watch and automatically build & push the NestJS api-1 when files change
+docker_build(
+    'api-1',       # Name of the Docker image
+    '../../nestjs',    # Directory for the NestJS API relative to the kubernetes dir
+    dockerfile='../../nestjs/apps/api-1/Dockerfile',  # Path to Dockerfile relative to kubernetes dir
+    live_update=[
+        sync('../../nestjs/apps/api-1/src', '/usr/src/app/src'),  # Sync local files into container
+    ]
+)
+
+# Watch and automatically build & push the NestJS api-2 when files change
+docker_build(
+    'api-2',       # Name of the Docker image
+    '../../nestjs',    # Directory for the NestJS API relative to the kubernetes dir
+    dockerfile='../../nestjs/apps/api-2/Dockerfile',  # Path to Dockerfile relative to kubernetes dir
+    live_update=[
+        sync('../../nestjs/apps/api-2/src', '/usr/src/app/src'),  # Sync local files into container
     ]
 )
 
 # Define Kubernetes resources
-k8s_resource('rules-engine-ui')
-k8s_resource('rules-engine-api')
+k8s_resource('web-app-1')
+k8s_resource('web-app-2')
+
+k8s_resource('api-1')
+k8s_resource('api-2')
+
 k8s_resource('keycloak')
