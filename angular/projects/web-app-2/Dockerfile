@@ -8,4 +8,4 @@ EXPOSE 80
 # Disable Angular CLI analytics prompt
 ENV NG_CLI_ANALYTICS=false
 # TODO: should we use this http-server for prod?
-CMD [ "npx", "http-server", "dist/web-app-2/browser", "-p", "80" ]
+CMD [ "npx", "http-server", "dist/web-app-2/browser", "-p", "80", "--proxy", "http://localhost:80?" ]

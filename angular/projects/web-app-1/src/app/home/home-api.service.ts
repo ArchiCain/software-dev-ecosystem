@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AppApiService {
+export class HomeApiService {
 
   private api1Url = 'http://api.localhost/api-1';
   private api2Url = 'http://api.localhost/api-2';
