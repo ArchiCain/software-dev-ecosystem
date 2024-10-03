@@ -27,6 +27,8 @@
             kubernetes-helm # Helm, a Kubernetes package manager
             nodejs_20 # Install the latest version of NodeJs
             terraform # Infrustructure-as-Code (IaC) tool
+            opentofu # OpenTofu is a fork of Terraform that is open-source, community-driven, and managed by the Linux Foundation.
+            terragrunt # Thin wrapper for Terraform / OpenTofu that supports locking for Terraform state and enforces best practices
             tilt # Add Tilt for Kubernetes dev workflow
             yarn # Yarn for package management
           ];

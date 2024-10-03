@@ -1,1 +1,9 @@
+# Nix Stuff
 .direnv
+
+# IAC stuff
+**/IAC/**/.terraform
+**/IAC/**/.terraform.lock.hcl
+**/.terragrunt-cache
+
+
