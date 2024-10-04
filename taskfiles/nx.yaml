@@ -1,0 +1,12 @@
+version: '3'
+
+tasks:
+  install-plugins:
+    desc: "Install nx plugins"
+    cmds:
+      - |
+        cd typescript
+        nx add @nrwl/angular
+        nx add @nrwl/nest
+        nx add @nrwl/node
+        nx add @nrwl/playwright
