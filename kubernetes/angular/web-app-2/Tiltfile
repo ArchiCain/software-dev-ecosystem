@@ -1,0 +1,20 @@
+# Load Kubernetes config
+k8s_yaml([
+    './deployment.yaml',
+    './service.yaml',
+    './ingress.yaml'
+])
+
+# Watch and automatically build & push web-app-2 when files change
+docker_build(
+    'web-app-2',        # Name of the Docker image
+    '../../../typescript',     # Build context at the Angular root
+    dockerfile='../../../typescript/apps/angular/web-app-2/Dockerfile',  # Dockerfile for web-app-2
+    live_update=[
+        sync('../../../typescript/apps/angular/web-app-2/src', '/usr/src/app/src'),  # Sync app source files
+        run('yarn nx build web-app-2 --prod', trigger='../../../typescript/apps/angular/web-app-2/src')  # Trigger build on changes
+    ]
+)
+
+# Define Kubernetes resource
+k8s_resource('web-app-2')

@@ -1,0 +1,18 @@
+# Load Kubernetes config
+k8s_yaml([
+    './deployment.yaml',
+    './service.yaml'
+])
+
+# Watch and automatically build & push the NestJS auth-api when files change
+docker_build(
+    'auth-api',       # Name of the Docker image
+    '../../../typescript',    # Directory for the NestJS API relative to the kubernetes dir
+    dockerfile='../../../typescript/apps/nestjs/auth-api/Dockerfile',  # Path to Dockerfile relative to kubernetes dir
+    live_update=[
+        sync('../../../typescript/apps/nestjs/auth-api/src', '/usr/src/app/src'),  # Sync local files into container
+    ]
+)
+
+# Define Kubernetes resources
+k8s_resource('auth-api')

@@ -1,89 +1,14 @@
-# Load Angular Kubernetes config
-k8s_yaml('../angular/web-app-1/deployment.yaml')
-k8s_yaml('../angular/web-app-1/service.yaml')
-k8s_yaml('../angular/web-app-1/ingress.yaml')
+# Load Angular apps
+include('../angular/web-app-1/Tiltfile')
+include('../angular/web-app-2/Tiltfile')
 
-k8s_yaml('../angular/web-app-2/deployment.yaml')
-k8s_yaml('../angular/web-app-2/service.yaml')
-k8s_yaml('../angular/web-app-2/ingress.yaml')
+# Load NestJS APIs
+include('../nestjs/api-1/Tiltfile')
+include('../nestjs/api-2/Tiltfile')
+include('../nestjs/auth-api/Tiltfile')
 
-# Load NestJs Kubernetes config
-k8s_yaml('../nestjs/api-1/deployment.yaml')
-k8s_yaml('../nestjs/api-1/service.yaml')
-
-k8s_yaml('../nestjs/api-2/deployment.yaml')
-k8s_yaml('../nestjs/api-2/service.yaml')
-
-k8s_yaml('../nestjs/auth-api/deployment.yaml')
-k8s_yaml('../nestjs/auth-api/service.yaml')
+# Load Keycloak configuration
+include('../keycloak/Tiltfile')
 
 # Load common Kubernetes config
-k8s_yaml('../common/api-gateway.yaml')
-
-# Load Keycloak Kubernetes config
-k8s_yaml('../keycloak/deployment.yaml')
-k8s_yaml('../keycloak/service.yaml')
-k8s_yaml('../keycloak/ingress.yaml')
-k8s_yaml('../keycloak/pvc.yaml')
-
-# Watch and automatically build & push the Angular web-app-1 when files change
-docker_build(
-    'web-app-1',        # Name of the Docker image
-    '../../typescript',     # Build context at the Angular root
-    dockerfile='../../typescript/apps/angular/web-app-1/Dockerfile',  # Dockerfile for web-app-1
-    live_update=[
-        sync('../../typescript/apps/angular/web-app-1/src', '/usr/src/app/src'),  # Sync app source files
-        run('yarn nx build web-app-1 --prod', trigger='../../typescript/apps/angular/web-app-1/src')  # Trigger build on changes
-    ]
-)
-
-# Watch and automatically build & push the Angular web-app-2 when files change
-docker_build(
-    'web-app-2',        # Name of the Docker image
-    '../../typescript',     # Build context at the Angular root
-    dockerfile='../../typescript/apps/angular/web-app-2/Dockerfile',  # Dockerfile for web-app-2
-    live_update=[
-        sync('../../typescript/apps/angular/web-app-2/src', '/usr/src/app/src'),  # Sync app source files
-        run('yarn nx build web-app-2 --prod', trigger='../../typescript/apps/angular/web-app-2/src')  # Trigger build on changes
-    ]
-)
-
-# Watch and automatically build & push the NestJS api-1 when files change
-docker_build(
-    'api-1',       # Name of the Docker image
-    '../../typescript',    # Directory for the NestJS API relative to the kubernetes dir
-    dockerfile='../../typescript/apps/nestjs/api-1/Dockerfile',  # Path to Dockerfile relative to kubernetes dir
-    live_update=[
-        sync('../../typescript/apps/nestjs/api-1/src', '/usr/src/app/src'),  # Sync local files into container
-    ]
-)
-
-# Watch and automatically build & push the NestJS api-2 when files change
-docker_build(
-    'api-2',       # Name of the Docker image
-    '../../typescript',    # Directory for the NestJS API relative to the kubernetes dir
-    dockerfile='../../typescript/apps/nestjs/api-2/Dockerfile',  # Path to Dockerfile relative to kubernetes dir
-    live_update=[
-        sync('../../typescript/apps/nestjs/api-2/src', '/usr/src/app/src'),  # Sync local files into container
-    ]
-)
-
-# Watch and automatically build & push the NestJS auth-api when files change
-docker_build(
-    'auth-api',       # Name of the Docker image
-    '../../typescript',    # Directory for the NestJS API relative to the kubernetes dir
-    dockerfile='../../typescript/apps/nestjs/auth-api/Dockerfile',  # Path to Dockerfile relative to kubernetes dir
-    live_update=[
-        sync('../../typescript/apps/nestjs/auth-api/src', '/usr/src/app/src'),  # Sync local files into container
-    ]
-)
-
-# Define Kubernetes resources
-k8s_resource('web-app-1')
-k8s_resource('web-app-2')
-
-k8s_resource('api-1')
-k8s_resource('api-2')
-k8s_resource('auth-api')
-
-k8s_resource('keycloak')
+k8s_yaml('./api-gateway.yaml')
