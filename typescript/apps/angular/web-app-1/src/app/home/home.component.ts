@@ -1,7 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { HomeApiService } from './home-api.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class HomeComponent {
   constructor(private homeApiService: HomeApiService) {}
 
   ngOnInit(): void {
-    this.api1Message$ = this.homeApiService.getMessageFromApi1();
-    this.api2Message$ = this.homeApiService.getMessageFromApi2();
+    this.api1Message$ = this.homeApiService.getMessageFromApi1().pipe(map((result) => result.message));
+    this.api2Message$ = this.homeApiService.getMessageFromApi2().pipe(map((result) => result.message));
   }
 }

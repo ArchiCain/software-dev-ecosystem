@@ -1,6 +1,25 @@
 **/node_modules
 **/dist
+**/*.ts
+**/*.json
+**/*.log
+**/*.tmp
+**/*.md
+*.env*
+*.yml
+*.config
+*.ignore
+angular.json
+tsconfig.json
+nx.json
 apps/*
 !apps/angular/web-app-1/**  # Include only the specific app directory we need
+
 libs/*
 !libs/angular/** # Include only the angular libs
+!libs/common/** # Include only the common libs
+
+# Excluding specific types of files throughout the workspace
+*.log
+.DS_Store
+*.md

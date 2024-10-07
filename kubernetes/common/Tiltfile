@@ -14,6 +14,9 @@ k8s_yaml('../nestjs/api-1/service.yaml')
 k8s_yaml('../nestjs/api-2/deployment.yaml')
 k8s_yaml('../nestjs/api-2/service.yaml')
 
+k8s_yaml('../nestjs/auth-api/deployment.yaml')
+k8s_yaml('../nestjs/auth-api/service.yaml')
+
 # Load common Kubernetes config
 k8s_yaml('../common/api-gateway.yaml')
 
@@ -48,28 +51,39 @@ docker_build(
 # Watch and automatically build & push the NestJS api-1 when files change
 docker_build(
     'api-1',       # Name of the Docker image
-    '../../nestjs',    # Directory for the NestJS API relative to the kubernetes dir
-    dockerfile='../../nestjs/apps/api-1/Dockerfile',  # Path to Dockerfile relative to kubernetes dir
+    '../../typescript',    # Directory for the NestJS API relative to the kubernetes dir
+    dockerfile='../../typescript/apps/nestjs/api-1/Dockerfile',  # Path to Dockerfile relative to kubernetes dir
     live_update=[
-        sync('../../nestjs/apps/api-1/src', '/usr/src/app/src'),  # Sync local files into container
+        sync('../../typescript/apps/nestjs/api-1/src', '/usr/src/app/src'),  # Sync local files into container
     ]
 )
 
 # Watch and automatically build & push the NestJS api-2 when files change
 docker_build(
     'api-2',       # Name of the Docker image
-    '../../nestjs',    # Directory for the NestJS API relative to the kubernetes dir
-    dockerfile='../../nestjs/apps/api-2/Dockerfile',  # Path to Dockerfile relative to kubernetes dir
+    '../../typescript',    # Directory for the NestJS API relative to the kubernetes dir
+    dockerfile='../../typescript/apps/nestjs/api-2/Dockerfile',  # Path to Dockerfile relative to kubernetes dir
     live_update=[
-        sync('../../nestjs/apps/api-2/src', '/usr/src/app/src'),  # Sync local files into container
+        sync('../../typescript/apps/nestjs/api-2/src', '/usr/src/app/src'),  # Sync local files into container
+    ]
+)
+
+# Watch and automatically build & push the NestJS auth-api when files change
+docker_build(
+    'auth-api',       # Name of the Docker image
+    '../../typescript',    # Directory for the NestJS API relative to the kubernetes dir
+    dockerfile='../../typescript/apps/nestjs/auth-api/Dockerfile',  # Path to Dockerfile relative to kubernetes dir
+    live_update=[
+        sync('../../typescript/apps/nestjs/auth-api/src', '/usr/src/app/src'),  # Sync local files into container
     ]
 )
 
 # Define Kubernetes resources
 k8s_resource('web-app-1')
-# k8s_resource('web-app-2')
+k8s_resource('web-app-2')
 
 k8s_resource('api-1')
 k8s_resource('api-2')
+k8s_resource('auth-api')
 
 k8s_resource('keycloak')

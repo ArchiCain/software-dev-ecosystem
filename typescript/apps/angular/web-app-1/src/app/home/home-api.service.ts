@@ -13,10 +13,10 @@ export class HomeApiService {
   constructor(private http: HttpClient) { }
 
   getMessageFromApi1(): Observable<any> {
-    return this.http.get(`${this.api1Url}/`, { responseType: 'text' });
+    return this.http.get(`${this.api1Url}/`);
   }
 
   getMessageFromApi2(): Observable<any> {
-    return this.http.get(`${this.api2Url}/`, { responseType: 'text' });
+    return this.http.get(`${this.api2Url}/`);
   }
 }
