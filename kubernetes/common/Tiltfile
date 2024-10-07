@@ -26,22 +26,22 @@ k8s_yaml('../keycloak/pvc.yaml')
 # Watch and automatically build & push the Angular web-app-1 when files change
 docker_build(
     'web-app-1',        # Name of the Docker image
-    '../../angular',     # Build context at the Angular root
-    dockerfile='../../angular/projects/web-app-1/Dockerfile',  # Dockerfile for web-app-1
+    '../../typescript',     # Build context at the Angular root
+    dockerfile='../../typescript/apps/angular/web-app-1/Dockerfile',  # Dockerfile for web-app-1
     live_update=[
-        sync('../../angular/projects/web-app-1/src', '/usr/src/app/src'),  # Sync app source files
-        run('yarn build web-app-1', trigger='../../angular/projects/web-app-1/src')  # Trigger build on changes
+        sync('../../typescript/apps/angular/web-app-1/src', '/usr/src/app/src'),  # Sync app source files
+        run('yarn nx build web-app-1 --prod', trigger='../../typescript/apps/angular/web-app-1/src')  # Trigger build on changes
     ]
 )
 
 # Watch and automatically build & push the Angular web-app-2 when files change
 docker_build(
     'web-app-2',        # Name of the Docker image
-    '../../angular',     # Build context at the Angular root
-    dockerfile='../../angular/projects/web-app-2/Dockerfile',  # Dockerfile for web-app-2
+    '../../typescript',     # Build context at the Angular root
+    dockerfile='../../typescript/apps/angular/web-app-2/Dockerfile',  # Dockerfile for web-app-2
     live_update=[
-        sync('../../angular/projects/web-app-2/src', '/usr/src/app/src'),  # Sync app source files
-        run('yarn build web-app-2', trigger='../../angular/projects/web-app-2/src')  # Trigger build on changes
+        sync('../../typescript/apps/angular/web-app-2/src', '/usr/src/app/src'),  # Sync app source files
+        run('yarn nx build web-app-2 --prod', trigger='../../typescript/apps/angular/web-app-2/src')  # Trigger build on changes
     ]
 )
 
@@ -67,7 +67,7 @@ docker_build(
 
 # Define Kubernetes resources
 k8s_resource('web-app-1')
-k8s_resource('web-app-2')
+# k8s_resource('web-app-2')
 
 k8s_resource('api-1')
 k8s_resource('api-2')

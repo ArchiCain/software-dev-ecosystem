@@ -2,7 +2,7 @@ export default {
   displayName: 'web-app-1',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/apps/web-app-1',
+  coverageDirectory: '../../coverage/apps/angular/web-app-1',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
