@@ -21,7 +21,7 @@ tasks:
   tilt:up:
     desc: "Start Tilt using the Tiltfile in the kubernetes directory"
     cmds:
-      - tilt up --file kubernetes/common/Tiltfile
+      - tilt up --file kubernetes/Tiltfile
 
   get-pods:
     desc: "List the kubernetes pods"

@@ -1,14 +1,2 @@
-# Load Angular apps
-include('../angular/web-app-1/Tiltfile')
-include('../angular/web-app-2/Tiltfile')
-
-# Load NestJS APIs
-include('../nestjs/api-1/Tiltfile')
-include('../nestjs/api-2/Tiltfile')
-include('../nestjs/auth-api/Tiltfile')
-
-# Load Keycloak configuration
-include('../keycloak/Tiltfile')
-
-# Load common Kubernetes config
+# Load api gateway config
 k8s_yaml('./api-gateway.yaml')
