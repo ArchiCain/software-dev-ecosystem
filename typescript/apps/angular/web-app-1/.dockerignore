@@ -12,6 +12,7 @@
 angular.json
 tsconfig.json
 nx.json
+.nx/*
 apps/*
 !apps/angular/web-app-1/**  # Include only the specific app directory we need
 

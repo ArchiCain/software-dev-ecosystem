@@ -6,11 +6,18 @@ k8s_yaml([
 
 # Watch and automatically build & push the NestJS api-1 when files change
 docker_build(
-    'api-1',       # Name of the Docker image
-    '../../../typescript',    # Directory for the NestJS API relative to the kubernetes dir
-    dockerfile='../../../typescript/apps/nestjs/api-1/Dockerfile',  # Path to Dockerfile relative to kubernetes dir
-    live_update=[
-        sync('../../../typescript/apps/nestjs/api-1/src', '/usr/src/app/src'),  # Sync local files into container
+    'api-1',
+    '../../../typescript',
+    dockerfile='../../../typescript/apps/nestjs/api-1/Dockerfile',
+    ignore=[
+        '.angular/*',
+        '.nx/*',
+        '.vscode/*',
+        'apps/*',
+        '!apps/nestjs/api-1/**',
+        'libs/*',
+        '!libs/nestjs/**',
+        '!libs/common/**'
     ]
 )
 

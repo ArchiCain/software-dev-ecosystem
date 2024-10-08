@@ -7,12 +7,19 @@ k8s_yaml([
 
 # Watch and automatically build & push web-app-1 when files change
 docker_build(
-    'web-app-1',        # Name of the Docker image
-    '../../../typescript',     # Build context at the Angular root
-    dockerfile='../../../typescript/apps/angular/web-app-1/Dockerfile',  # Dockerfile for web-app-1
-    live_update=[
-        sync('../../../typescript/apps/angular/web-app-1/src', '/usr/src/app/src'),  # Sync app source files
-        run('yarn nx build web-app-1 --prod', trigger='../../../typescript/apps/angular/web-app-1/src')  # Trigger build on changes
+    'web-app-1',
+    '../../../typescript',  # This remains the root but will be filtered
+    dockerfile='../../../typescript/apps/angular/web-app-1/Dockerfile',
+    ignore=[
+        '.angular/*',
+        '.nx/*',
+        '.vscode/*',
+        'apps/*',
+        '!apps/angular/nginx.conf',
+        '!apps/angular/web-app-1/**',
+        'libs/*',
+        '!libs/angular/**',
+        '!libs/common/**'
     ]
 )
 

@@ -20,8 +20,8 @@ spec:
         - containerPort: 80
         resources:
           requests:
-            memory: "256Mi"    # Minimum memory guaranteed for the container
+            memory: "512Mi"    # Minimum memory guaranteed for the container
             cpu: "500m"        # Minimum CPU guaranteed for the container
           limits:
-            memory: "512Mi"    # Maximum memory allowed for the container
+            memory: "1024Mi"    # Maximum memory allowed for the container
             cpu: "1000m"       # Maximum CPU allowed for the container (1 full core)
