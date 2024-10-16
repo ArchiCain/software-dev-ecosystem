@@ -5,5 +5,6 @@
 **/IAC/**/.terraform
 **/IAC/**/.terraform.lock.hcl
 **/.terragrunt-cache
-
+**/IAC/**/backend.tf
+**/IAC/**/terraform.tfstate
 
