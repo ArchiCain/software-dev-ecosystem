@@ -1,5 +1,11 @@
 version: "3"
 
+tasks:
+  default:
+    desc: List Projects tasks by default
+    cmds:
+      - task -a
+
 includes:
   kubernetes: ./taskfiles/kubernetes.yaml
   angular: ./taskfiles/angular.yaml
