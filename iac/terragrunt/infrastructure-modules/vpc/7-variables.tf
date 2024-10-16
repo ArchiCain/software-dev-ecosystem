@@ -3,6 +3,11 @@ variable "env" {
   type        = string
 }
 
+variable "project" {
+  description = "A Project name."
+  type        = string
+}
+
 variable "vpc_cidr_block" {
   description = "CIDR (Classless Inter-Domain Routing)."
   type        = string

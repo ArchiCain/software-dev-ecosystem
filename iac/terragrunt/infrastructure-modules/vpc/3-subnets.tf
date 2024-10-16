@@ -6,7 +6,7 @@ resource "aws_subnet" "private" {
   availability_zone = var.azs[count.index]
 
   tags = merge(
-    { Name = "${var.env}-private-${var.azs[count.index]}" },
+    { Name = "${var.project}-${var.env}-private-${var.azs[count.index]}" },
     var.private_subnet_tags
   )
 }
@@ -19,7 +19,7 @@ resource "aws_subnet" "public" {
   availability_zone = var.azs[count.index]
 
   tags = merge(
-    { Name = "${var.env}-public-${var.azs[count.index]}" },
+    { Name = "${var.project}-${var.env}-public-${var.azs[count.index]}" },
     var.public_subnet_tags
   )
 }

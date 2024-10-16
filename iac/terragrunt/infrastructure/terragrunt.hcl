@@ -1,7 +1,7 @@
 remote_state {
   backend = "local"
   generate = {
-    path      = "backend.tf"
+    path = "backend.tf"
     if_exists = "overwrite_terragrunt"
   }
 
@@ -11,7 +11,7 @@ remote_state {
 }
 
 generate "provider" {
-  path      = "provider.tf"
+  path = "provider.tf"
   if_exists = "overwrite_terragrunt"
 
   contents = <<EOF
@@ -20,4 +20,3 @@ provider "aws" {
 }
 EOF
 }
-
