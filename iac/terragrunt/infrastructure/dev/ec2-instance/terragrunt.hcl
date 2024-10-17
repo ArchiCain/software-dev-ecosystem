@@ -22,9 +22,9 @@ dependency "vpc" {
 }
 
 inputs = {
-  env           = include.env.locals.env
-  project       = include.env.locals.project
-  subnet_ids     = dependency.vpc.outputs.private_subnet_ids
-  instance_names = ["k3s-instance-0","k3s-instance-1","k3s-instance-2"]
+  env             = include.env.locals.env
+  project         = include.env.locals.project
+  subnet_ids      = dependency.vpc.outputs.private_subnet_ids
+  instance_names  = include.env.locals.instance_names
   instance_vpc_id = dependency.vpc.outputs.vpc_id
 }
