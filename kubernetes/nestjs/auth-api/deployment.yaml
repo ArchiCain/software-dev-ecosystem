@@ -15,13 +15,21 @@ spec:
       containers:
       - name: auth-api
         image: auth-api:latest
-        imagePullPolicy: IfNotPresent  # defaults to local image
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3002
         resources:
           requests:
-            memory: "256Mi"  # Minimum memory guaranteed for NestJS
-            cpu: "500m"      # Minimum CPU guaranteed (50% of a core)
+            memory: "256Mi"
+            cpu: "500m"
           limits:
-            memory: "512Mi"  # Maximum memory allowed for NestJS
-            cpu: "1000m"     # Maximum CPU allowed (1 full core)
+            memory: "512Mi"
+            cpu: "1000m"
+        volumeMounts:
+        - mountPath: /etc/certs  # Mount the entire secret here
+          name: keycloak-tls-secret
+          readOnly: true  # Set as read-only for security
+      volumes:
+      - name: keycloak-tls-secret
+        secret:
+          secretName: keycloak-tls-secret  # Reference the Kubernetes Secret storing the certs

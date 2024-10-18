@@ -21,7 +21,7 @@ tasks:
   delete-all:
     desc: "Deletes all resources in kubernetes"
     cmds:
-      - kubectl delete all --all
+      - kubectl delete deployments,svc,pods --all
 
   tilt:up:
     desc: "Start Tilt using the Tiltfile in the kubernetes directory"
@@ -32,3 +32,10 @@ tasks:
     desc: "List the kubernetes pods"
     cmds:
       - kubectl get pods 
+
+  setup-local-cert:
+    desc: "This runs a script that sets up the local TLS cert needed for HTTPS"
+    dir: "./"  # Ensures that the task is run from the project root directory
+    cmds:
+      - chmod 777 ./scripts/setup-local-cert.sh
+      - ./scripts/setup-local-cert.sh

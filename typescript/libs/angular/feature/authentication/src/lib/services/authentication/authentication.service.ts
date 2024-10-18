@@ -1,55 +1,20 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private keycloakUrl: string = "http://keycloak.localhost";
-  private keycloakRealm: string = 'software-dev-ecosystem-realm';
-  private keycloakClientId: string = 'web-app-1-client';
+  private readonly authApiUrl = 'https://api.localhost/auth-api';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
-  login(username: string, password: string) {
-    const tokenEndpoint = `https://${this.keycloakUrl}/realms/${this.keycloakRealm}/protocol/openid-connect/token`;
-
-    const body = new HttpParams()
-      .set('client_id', this.keycloakClientId)
-      .set('grant_type', 'password')
-      .set('username', username)
-      .set('password', password);
-
-    this.http.post<any>(tokenEndpoint, body.toString(), {
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    }).subscribe({
-      next: (response) => {
-        this.handleAuthenticationSuccess(response);
-      },
-      error: (error) => {
-        console.error('Authentication failed:', error);
-      }
-    });
+  login(username: string, password: string): Observable<any> {
+    return this.http.post<any>(`${this.authApiUrl}/login`, { username, password }, { withCredentials: true });
   }
 
-  private handleAuthenticationSuccess(response: any) {
-    sessionStorage.setItem('kc_token', response.access_token);
-    sessionStorage.setItem('kc_refresh_token', response.refresh_token);
-    // Navigate to the home page
-    this.router.navigate(['/home']);
-  }
-
-  isLoggedIn(): boolean {
-    const token = sessionStorage.getItem('kc_token');
-    // Add more logic to check token validity or expiration
-    return !!token;
-  }
-
-  logout() {
-    sessionStorage.removeItem('kc_token');
-    sessionStorage.removeItem('kc_refresh_token');
-    // Redirect to login page
-    this.router.navigate(['/login']);
+  validate(): Observable<any> {
+    return this.http.get<any>(`${this.authApiUrl}/validate`, { withCredentials: true });
   }
 }

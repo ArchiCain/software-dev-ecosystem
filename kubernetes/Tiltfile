@@ -1,3 +1,6 @@
+# Load Keycloak configuration
+include('./keycloak/Tiltfile')
+
 # Load Angular apps
 include('./angular/web-app-1/Tiltfile')
 include('./angular/web-app-2/Tiltfile')
@@ -9,6 +12,3 @@ include('./common/Tiltfile')
 include('./nestjs/api-1/Tiltfile')
 include('./nestjs/api-2/Tiltfile')
 include('./nestjs/auth-api/Tiltfile')
-
-# Load Keycloak configuration
-include('./keycloak/Tiltfile')

@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { HomeApiService } from './home-api.service';
+import { ValidateTokenComponent } from '@feature/authentication';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, AsyncPipe],
+  imports: [RouterOutlet, AsyncPipe, ValidateTokenComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

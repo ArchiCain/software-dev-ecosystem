@@ -7,16 +7,16 @@ import { Observable } from 'rxjs';
 })
 export class HomeApiService {
 
-  private api1Url = 'http://api.localhost/api-1';
-  private api2Url = 'http://api.localhost/api-2';
+  private api1Url = 'https://api.localhost/api-1';
+  private api2Url = 'https://api.localhost/api-2';
 
   constructor(private http: HttpClient) { }
 
   getMessageFromApi1(): Observable<any> {
-    return this.http.get(`${this.api1Url}/`);
+    return this.http.get(`${this.api1Url}/`, { withCredentials: true });
   }
 
   getMessageFromApi2(): Observable<any> {
-    return this.http.get(`${this.api2Url}/`);
+    return this.http.get(`${this.api2Url}/`, { withCredentials: true });
   }
 }

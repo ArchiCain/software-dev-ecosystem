@@ -2,16 +2,23 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: web-app-1-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"  # Redirect HTTP to HTTPS
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"  # Force all HTTP traffic to HTTPS
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - web-app-1.localhost
+      secretName: tls-secret  # Reference to the same TLS secret as your API Gateway (assuming the same cert works)
   rules:
-  - host: "web-app-1.localhost"
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: web-app-1-service
-            port:
-              number: 80
+    - host: "web-app-1.localhost"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web-app-1-service
+                port:
+                  number: 80
