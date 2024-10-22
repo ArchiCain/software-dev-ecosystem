@@ -20,6 +20,7 @@
           buildInputs = [
             deploy-rs # Tool used to deploy Flakes to Nixos remote hosts
             docker # Docker for containerization
+            graphviz # Create / Display DOT diagrams
             go-task # Task for common commands
             helmfile # Declarative spec for deploying Helm charts
             k9s # Kubernetes CLI To Manage Your Clusters In Style
