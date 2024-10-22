@@ -2,9 +2,10 @@
 .direnv
 
 # IAC stuff
+**/.DS_Store
+.DS_Store
 **/IAC/**/.terraform
 **/IAC/**/.terraform.lock.hcl
 **/.terragrunt-cache
 **/IAC/**/backend.tf
 **/IAC/**/terraform.tfstate
-
