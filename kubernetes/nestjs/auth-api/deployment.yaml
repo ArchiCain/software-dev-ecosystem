@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-api
+  template:
+    metadata:
+      labels:
+        app: auth-api
+    spec:
+      containers:
+      - name: auth-api
+        image: auth-api:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3002
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "500m"
+          limits:
+            memory: "512Mi"
+            cpu: "1000m"
+        volumeMounts:
+        - mountPath: /etc/certs  # Mount the entire secret here
+          name: keycloak-tls-secret
+          readOnly: true  # Set as read-only for security
+      volumes:
+      - name: keycloak-tls-secret
+        secret:
+          secretName: keycloak-tls-secret  # Reference the Kubernetes Secret storing the certs

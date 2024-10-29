@@ -1,12 +1,12 @@
 version: '3'
 
 tasks:
-  traefik-install:
-    desc: "Install Traefik Ingress Controller"
+  nginx-ingress-install:
+    desc: "Install Nginx Ingress Controller"
     cmds:
-      - helm repo add traefik https://traefik.github.io/charts
+      - helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
       - helm repo update
-      - helm install traefik traefik/traefik
+      - helm install nginx-ingress ingress-nginx/ingress-nginx
 
   apply:
     desc: "Apply Kubernetes resources"
@@ -18,7 +18,24 @@ tasks:
     cmds:
       - kubectl delete -f kubernetes/
 
+  delete-all:
+    desc: "Deletes all resources in kubernetes"
+    cmds:
+      - kubectl delete deployments,svc,pods --all
+
   tilt:up:
     desc: "Start Tilt using the Tiltfile in the kubernetes directory"
     cmds:
       - tilt up --file kubernetes/Tiltfile
+
+  get-pods:
+    desc: "List the kubernetes pods"
+    cmds:
+      - kubectl get pods 
+
+  setup-local-cert:
+    desc: "This runs a script that sets up the local TLS cert needed for HTTPS"
+    dir: "./"  # Ensures that the task is run from the project root directory
+    cmds:
+      - chmod 777 ./scripts/setup-local-cert.sh
+      - ./scripts/setup-local-cert.sh

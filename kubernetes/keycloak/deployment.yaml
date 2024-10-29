@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak
+  labels:
+    app: keycloak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keycloak
+  template:
+    metadata:
+      labels:
+        app: keycloak
+    spec:
+      containers:
+        - name: keycloak
+          image: quay.io/keycloak/keycloak:latest
+          args: ["start", "--hostname-strict=true", "--https-port=8443"]
+          env:
+            - name: KEYCLOAK_ADMIN
+              value: "admin"
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              value: "admin"
+            - name: KEYCLOAK_FRONTEND_URL
+              value: "https://keycloak.localhost/"
+            - name: PROXY_ADDRESS_FORWARDING
+              value: "true"
+            - name: KC_HOSTNAME_STRICT_HTTPS
+              value: "false"  # Disable HTTPS enforcement in Keycloak
+            - name: KC_HTTPS_CERTIFICATE_FILE
+              value: "/etc/certs/tls.crt"  # Path inside the container to the TLS certificate
+            - name: KC_HTTPS_CERTIFICATE_KEY_FILE
+              value: "/etc/certs/tls.key"  # Path inside the container to the TLS key
+            - name: KC_HOSTNAME
+              value: "keycloak.localhost"  # Explicitly set the hostname
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+          volumeMounts:
+            - mountPath: /opt/keycloak/data
+              name: keycloak-data
+            - mountPath: /etc/certs  # Mount the TLS secret as a volume here
+              name: keycloak-tls-secret  # Ensure the correct secret name is referenced here
+              readOnly: true  # Set as read-only for security
+      volumes:
+        - name: keycloak-data
+          persistentVolumeClaim:
+            claimName: keycloak-pvc
+        - name: keycloak-tls-secret  # Ensure the correct secret name is referenced here
+          secret:
+            secretName: keycloak-tls-secret  # Reference the Kubernetes Secret storing the new Keycloak certs

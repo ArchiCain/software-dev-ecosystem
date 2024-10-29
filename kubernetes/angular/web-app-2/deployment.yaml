@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-app-2
+  template:
+    metadata:
+      labels:
+        app: web-app-2
+    spec:
+      containers:
+      - name: web-app-2
+        image: web-app-2:latest
+        imagePullPolicy: IfNotPresent # Defaults to local image
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "512Mi"    # Minimum memory guaranteed for the container
+            cpu: "500m"        # Minimum CPU guaranteed for the container
+          limits:
+            memory: "1024Mi"    # Maximum memory allowed for the container
+            cpu: "1000m"       # Maximum CPU allowed for the container (1 full core)

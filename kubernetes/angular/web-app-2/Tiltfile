@@ -1,0 +1,27 @@
+# Load Kubernetes config
+k8s_yaml([
+    './deployment.yaml',
+    './service.yaml',
+    './ingress.yaml'
+])
+
+# Watch and automatically build & push web-app-2 when files change
+docker_build(
+    'web-app-2',
+    '../../../typescript',  # This remains the root but will be filtered
+    dockerfile='../../../typescript/apps/angular/web-app-2/Dockerfile',
+    ignore=[
+        '.angular/*',
+        '.nx/*',
+        '.vscode/*',
+        'apps/*',
+        '!apps/angular/nginx.conf',
+        '!apps/angular/web-app-2/**',
+        'libs/*',
+        '!libs/angular/**',
+        '!libs/common/**'
+    ]
+)
+
+# Define Kubernetes resource
+k8s_resource('web-app-2')

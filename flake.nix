@@ -28,22 +28,15 @@
             tilt # Add Tilt for Kubernetes dev workflow
           ];
           shellHook = ''
-            # Ensure Angular CLI is installed
-            if ! command -v ng > /dev/null; then
-              yarn global add @angular/cli
+            # Ensure Nx CLI is installed
+            if ! command -v nx > /dev/null; then
+              echo "Nx CLI not found. Installing globally via Yarn..."
+              yarn global add nx
             else
-              echo "Angular CLI is already installed."
+              echo "Nx CLI is already installed."
             fi
 
-            # Ensure NestJS CLI is installed
-            if ! command -v nest > /dev/null; then
-              echo "NestJS CLI not found. Installing globally via Yarn..."
-              yarn global add @nestjs/cli
-            else
-              echo "NestJS CLI is already installed."
-            fi
-
-            # Add Yarn global bin to PATH (for globally installed packages like ng and nest)
+            # Add Yarn global bin to PATH (for globally installed packages like nx)
             export PATH="$(yarn global bin):$PATH"
           '';
         };

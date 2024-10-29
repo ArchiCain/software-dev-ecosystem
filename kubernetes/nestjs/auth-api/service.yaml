@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-api-service
+spec:
+  type: ClusterIP  # Ensures it's accessible within the cluster
+  selector:
+    app: auth-api
+  ports:
+    - port: 3002       # The port the service exposes
+      targetPort: 3002  # The port the NestJS app is listening on

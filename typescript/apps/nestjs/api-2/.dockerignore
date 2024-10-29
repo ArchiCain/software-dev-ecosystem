@@ -1,0 +1,10 @@
+**/node_modules
+**/dist
+**/*.ts
+**/*.map
+apps/*
+!apps/nestjs/api-2/**  # Include only the specific app directory we need
+
+libs/*
+!libs/nestjs/**  # Include only the nestjs
+!libs/common/** # Include only the common libs

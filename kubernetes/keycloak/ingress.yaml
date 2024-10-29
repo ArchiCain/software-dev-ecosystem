@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: keycloak-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"  # Redirect HTTP to HTTPS
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"  # Use HTTPS to communicate with Keycloak internally
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - keycloak.localhost
+      secretName: keycloak-tls-secret  # Reference the new TLS secret in Kubernetes
+  rules:
+    - host: "keycloak.localhost"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: keycloak
+                port:
+                  number: 8443  # Make sure this matches the Keycloak HTTPS port

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-1
+  template:
+    metadata:
+      labels:
+        app: api-1
+    spec:
+      containers:
+      - name: api-1
+        image: api-1:latest
+        imagePullPolicy: IfNotPresent  # defaults to local image
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            memory: "256Mi"  # Minimum memory guaranteed for NestJS
+            cpu: "500m"      # Minimum CPU guaranteed (50% of a core)
+          limits:
+            memory: "512Mi"  # Maximum memory allowed for NestJS
+            cpu: "1000m"     # Maximum CPU allowed (1 full core)

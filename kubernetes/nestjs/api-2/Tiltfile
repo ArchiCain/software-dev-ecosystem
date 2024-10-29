@@ -1,0 +1,25 @@
+# Load Kubernetes config
+k8s_yaml([
+    './deployment.yaml',
+    './service.yaml'
+])
+
+# Watch and automatically build & push the NestJS api-2 when files change
+docker_build(
+    'api-2',
+    '../../../typescript',
+    dockerfile='../../../typescript/apps/nestjs/api-2/Dockerfile',
+    ignore=[
+        '.angular/*',
+        '.nx/*',
+        '.vscode/*',
+        'apps/*',
+        '!apps/nestjs/api-2/**',
+        'libs/*',
+        '!libs/nestjs/**',
+        '!libs/common/**'
+    ]
+)
+
+# Define Kubernetes resources
+k8s_resource('api-2')

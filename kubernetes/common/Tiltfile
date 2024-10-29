@@ -1,0 +1,5 @@
+# Define a local command to create the TLS secret if it doesn't exist
+local('kubectl create secret tls tls-secret --cert=../../local-config/api.localhost.pem --key=../../local-config/api.localhost-key.pem || true')
+
+# Load api gateway config
+k8s_yaml('./api-gateway.yaml')

@@ -1,0 +1,6 @@
+{
+    "nxConsole.commonNxCommands": [
+        "run",
+        "run-many"
+    ]
+}
