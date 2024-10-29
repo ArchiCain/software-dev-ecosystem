@@ -72,7 +72,10 @@ exit # This exits the nix-shell making git nolonger avalible
 cp nixos-flake-tailscale/configuration.nix /etc/nixos
 ```
 
-- Comment out "unstable.tailscale" from enviroment.systemPackages in /etc/nixos/configuration.nix
+- Remove "unstable.tailscale" from /etc/nixos/configuration.nix
+```
+sed -i '/unstable.tailscale/d' /etc/nixos/configuration.nix
+```
 - Deploy configuration.nix
 
 ```
