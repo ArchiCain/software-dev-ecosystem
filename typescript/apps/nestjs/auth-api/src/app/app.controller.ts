@@ -16,7 +16,6 @@ export class AppController {
         httpOnly: true,
         secure: true, // Secure should be true only in production
         sameSite: 'none', // Ensure SameSite is set to 'none' for cross-site cookies
-        // domain: 'web-app-1.localhost', // Use only the domain name without protocol
         path: '/', // Ensure it applies to all paths
       });
 
