@@ -22,22 +22,22 @@
       ];
     };
 
-      # deploy.nodes.example = {
-      #   sshOpts = ["-p" "22"];
-      #   hostname = "192.168.1.58";
-      #   fastConnection = true;
-      #   interactiveSudo = true;
-      #   buildOnRemote = true;
-      #   # imports = [ ./flake.nix ];
-      #   profiles = {
-      #     system = {
-      #       sshUser = "rhousand";
-      #       path =
-      #         deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.example-nixos-system;
-      #       user = "root";
-      #     };
-      #   };
-      # };
+    # deploy.nodes.example = {
+    #   sshOpts = ["-p" "22"];
+    #   hostname = "192.168.1.58";
+    #   fastConnection = true;
+    #   interactiveSudo = true;
+    #   buildOnRemote = true;
+    #   # imports = [ ./flake.nix ];
+    #   profiles = {
+    #     system = {
+    #       sshUser = "rhousand";
+    #       path =
+    #         deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.example-nixos-system;
+    #       user = "root";
+    #     };
+    #   };
+    # };
 
     # Deploy k3sNode1
     nixosConfigurations.k3sNode1-nixos-system = nixpkgs.lib.nixosSystem {
