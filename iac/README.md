@@ -73,9 +73,11 @@ cp nixos-flake-tailscale/configuration.nix /etc/nixos
 ```
 
 - Remove "unstable.tailscale" from /etc/nixos/configuration.nix
+
 ```
 sed -i '/unstable.tailscale/d' /etc/nixos/configuration.nix
 ```
+
 - Deploy configuration.nix
 
 ```
@@ -97,4 +99,11 @@ cd ~/nixos-flake-tailscale
 nixos-rebuild switch --flake .#tsNode --impure
 ```
 
+- Exit SSM session to the EC2 instance
+
 - Access the Machines tab in Tailscale management console to sign the locked out host
+
+# Deploy K3s
+
+[Deploy K3s README]
+(../kubernetes/k3s/README.md)
