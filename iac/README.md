@@ -105,5 +105,4 @@ nixos-rebuild switch --flake .#tsNode --impure
 
 # Deploy K3s
 
-[Deploy K3s README]
-(../kubernetes/k3s/README.md)
+[Deploy K3s README](../kubernetes/k3s/README.md)
