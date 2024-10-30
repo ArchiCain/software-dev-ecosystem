@@ -10,9 +10,9 @@
     deploy-rs,
   }: let
     masterNode = "k3sNode1";
-    k3sNode1IP = "54.88.5.167";
-    k3sNode2IP = "18.212.192.31";
-    k3sNode3IP = "54.205.20.90";
+    k3sNode1IP = "100.97.60.9";
+    k3sNode2IP = "100.121.51.27";
+    k3sNode3IP = "100.110.101.106";
   in {
     # Deploy Example node
     nixosConfigurations.example-nixos-system = nixpkgs.lib.nixosSystem {
@@ -22,22 +22,22 @@
       ];
     };
 
-    deploy.nodes.example = {
-      sshOpts = ["-p" "22"];
-      hostname = "192.168.1.58";
-      fastConnection = true;
-      interactiveSudo = true;
-      buildOnRemote = true;
-      # imports = [ ./flake.nix ];
-      profiles = {
-        system = {
-          sshUser = "rhousand";
-          path =
-            deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.example-nixos-system;
-          user = "root";
-        };
-      };
-    };
+      # deploy.nodes.example = {
+      #   sshOpts = ["-p" "22"];
+      #   hostname = "192.168.1.58";
+      #   fastConnection = true;
+      #   interactiveSudo = true;
+      #   buildOnRemote = true;
+      #   # imports = [ ./flake.nix ];
+      #   profiles = {
+      #     system = {
+      #       sshUser = "rhousand";
+      #       path =
+      #         deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.example-nixos-system;
+      #       user = "root";
+      #     };
+      #   };
+      # };
 
     # Deploy k3sNode1
     nixosConfigurations.k3sNode1-nixos-system = nixpkgs.lib.nixosSystem {
