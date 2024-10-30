@@ -62,7 +62,7 @@
     deploy.nodes.k3sNode1 = {
       sshOpts = ["-p" "22"];
       hostname = k3sNode1IP;
-      fastConnection = true;
+      fastConnection = false;
       interactiveSudo = false;
       buildOnRemote = true;
       profiles = {
