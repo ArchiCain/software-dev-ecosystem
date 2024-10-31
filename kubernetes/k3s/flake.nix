@@ -51,10 +51,10 @@
         k3sArgs = {
           hostName = "k3sNode1";
           masterNode = masterNode;
-          masterIP = k3sNode1IP;
-          node1IP = k3sNode1IP;
-          node2IP = k3sNode2IP;
-          node3IP = k3sNode3IP;
+          masterIP = "10.10.3.216";
+          node1IP = "10.10.3.216";
+          node2IP = "10.10.1.6";
+          node3IP = "10.10.2.136";
         };
       };
     };
@@ -84,13 +84,21 @@
         ./services/k3s/default.nix
       ];
       specialArgs = {
+          #k3sArgs = {
+          #  hostName = "k3sNode2";
+          #  masterNode = masterNode;
+          #  masterIP = k3sNode1IP;
+          #  node1IP = k3sNode1IP;
+          #  node2IP = k3sNode2IP;
+          #  node3IP = k3sNode3IP;
+          #};
         k3sArgs = {
           hostName = "k3sNode2";
           masterNode = masterNode;
-          masterIP = k3sNode1IP;
-          node1IP = k3sNode1IP;
-          node2IP = k3sNode2IP;
-          node3IP = k3sNode3IP;
+          masterIP = "10.10.3.216";
+          node1IP = "10.10.3.216";
+          node2IP = "10.10.1.6";
+          node3IP = "10.10.2.136";
         };
       };
     };
@@ -123,11 +131,16 @@
         k3sArgs = {
           hostName = "k3sNode3";
           masterNode = masterNode;
-          masterIP = k3sNode1IP;
-          node1IP = k3sNode1IP;
-          node2IP = k3sNode2IP;
-          node3IP = k3sNode3IP;
+          masterIP = "10.10.3.216";
+          node1IP = "10.10.3.216";
+          node2IP = "10.10.1.6";
+          node3IP = "10.10.2.136";
         };
+          #  masterNode = masterNode;
+          #  masterIP = k3sNode1IP;
+          #  node1IP = k3sNode1IP;
+          #  node2IP = k3sNode2IP;
+          #  node3IP = k3sNode3IP;
       };
     };
 

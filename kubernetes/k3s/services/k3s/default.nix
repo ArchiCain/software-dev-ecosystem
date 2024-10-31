@@ -22,10 +22,10 @@
   services.k3s = {
     enable = true;
     role = "server";
-    tokenFile = "/var/lib/rancher/k3s/server/token";
+    #tokenFile = "/var/lib/rancher/k3s/server/token";
     # On frist deployment create token using nix run nixpkgs#pwgen -s 16 and add it below. Also commet our tokenFile above. Do not commit the cluster token to git
     # The followins can be used to generate a token "nix run nixpkgs#pwgen -- -s -n 16 |head -n 2"
-    #token = "";
+    token = "w5tBmhppkhaMS6Qy";
     extraFlags = toString ([
         "--write-kubeconfig-mode \"0644\""
         "--cluster-init"
