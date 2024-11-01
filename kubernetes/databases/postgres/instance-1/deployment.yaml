@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-instance-1
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-instance-1
+  template:
+    metadata:
+      labels:
+        app: postgres-instance-1
+    spec:
+      containers:
+      - name: postgres
+        image: postgres-instance-1:latest
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_USER
+          value: "admin"
+        - name: POSTGRES_PASSWORD
+          value: "admin"
+        - name: POSTGRES_DB
+          value: "database-1"
+        resources:
+          requests:
+            memory: "256Mi"  # Minimum memory guaranteed for NestJS
+            cpu: "500m"      # Minimum CPU guaranteed (50% of a core)
+          limits:
+            memory: "512Mi"  # Maximum memory allowed for NestJS
+            cpu: "1000m"     # Maximum CPU allowed (1 full core)
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: postgres-storage
+        persistentVolumeClaim:
+          claimName: postgres-instance-1-pvc

@@ -19,9 +19,9 @@ spec:
           image: quay.io/keycloak/keycloak:latest
           args: ["start", "--hostname-strict=true", "--https-port=8443"]
           env:
-            - name: KEYCLOAK_ADMIN
+            - name: KC_BOOTSTRAP_ADMIN_USERNAME
               value: "admin"
-            - name: KEYCLOAK_ADMIN_PASSWORD
+            - name: KC_BOOTSTRAP_ADMIN_PASSWORD
               value: "admin"
             - name: KEYCLOAK_FRONTEND_URL
               value: "https://keycloak.localhost/"
@@ -35,6 +35,15 @@ spec:
               value: "/etc/certs/tls.key"  # Path inside the container to the TLS key
             - name: KC_HOSTNAME
               value: "keycloak.localhost"  # Explicitly set the hostname
+            # Database Configuration
+            - name: KC_DB
+              value: "postgres"  # Set database type to PostgreSQL
+            - name: KC_DB_URL
+              value: "jdbc:postgresql://postgres-keycloak-instance.default.svc.cluster.local:5433/keycloak_db"
+            - name: KC_DB_USERNAME
+              value: "admin"
+            - name: KC_DB_PASSWORD
+              value: "admin"
           resources:
             requests:
               memory: "512Mi"

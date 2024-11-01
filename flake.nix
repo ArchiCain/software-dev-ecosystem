@@ -26,6 +26,7 @@
             terraform # Infrustructure-as-Code (IaC) tool
             go-task # Task for common commands
             tilt # Add Tilt for Kubernetes dev workflow
+            liquibase # Add Liquibase for database migrations
           ];
           shellHook = ''
             # Ensure Nx CLI is installed

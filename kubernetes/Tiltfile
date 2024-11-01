@@ -1,6 +1,10 @@
 # Load Keycloak configuration
 include('./keycloak/Tiltfile')
 
+# Load Databases
+include('./databases/postgres/keycloak-instance/Tiltfile')
+include('./databases/postgres/instance-1/Tiltfile')
+
 # Load Angular apps
 include('./angular/web-app-1/Tiltfile')
 include('./angular/web-app-2/Tiltfile')

@@ -1,0 +1,8 @@
+version: '3'
+
+tasks:
+  update-postgres-instance-1:
+    desc: "Run Liquibase update for PostgreSQL instance-1"
+    dir: databases/postgres/instance-1
+    cmds:
+      - liquibase update

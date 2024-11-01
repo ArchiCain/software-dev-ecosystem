@@ -5,3 +5,4 @@ includes:
   angular: ./taskfiles/angular.yaml
   nestjs: ./taskfiles/nestjs.yaml
   nx: ./taskfiles/nx.yaml
+  databases: ./taskfiles/databases.yaml

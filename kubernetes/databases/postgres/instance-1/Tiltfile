@@ -1,0 +1,10 @@
+# Load the Kubernetes config
+k8s_yaml('./deployment.yaml')
+k8s_yaml('./service.yaml')
+k8s_yaml('./pvc.yaml')
+
+# Build the container
+docker_build('postgres-instance-1', '../../../../databases/postgres/instance-1')
+
+# Deploy the resources to Kubernetes
+k8s_resource('postgres-instance-1', port_forwards=5432)
