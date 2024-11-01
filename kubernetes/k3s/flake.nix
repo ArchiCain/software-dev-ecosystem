@@ -13,6 +13,9 @@
     k3sNode1IP = "100.97.60.9";
     k3sNode2IP = "100.121.51.27";
     k3sNode3IP = "100.110.101.106";
+    k3sNode1SubnetIP = "10.10.3.216";
+    k3sNode2SubnetIP = "10.10.1.6";
+    k3sNode3SubnetIP = "10.10.2.136";
   in {
     # Deploy Example node
     nixosConfigurations.example-nixos-system = nixpkgs.lib.nixosSystem {
@@ -51,10 +54,10 @@
         k3sArgs = {
           hostName = "k3sNode1";
           masterNode = masterNode;
-          masterIP = "10.10.3.216";
-          node1IP = "10.10.3.216";
-          node2IP = "10.10.1.6";
-          node3IP = "10.10.2.136";
+          masterIP = k3sNode1SubnetIP;
+          node1IP = k3sNode1SubnetIP;
+          node2IP = k3sNode2SubnetIP;
+          node3IP = k3sNode3SubnetIP;
         };
       };
     };
@@ -95,10 +98,10 @@
         k3sArgs = {
           hostName = "k3sNode2";
           masterNode = masterNode;
-          masterIP = "10.10.3.216";
-          node1IP = "10.10.3.216";
-          node2IP = "10.10.1.6";
-          node3IP = "10.10.2.136";
+          masterIP = k3sNode1SubnetIP;
+          node1IP = k3sNode1SubnetIP;
+          node2IP = k3sNode2SubnetIP;
+          node3IP = k3sNode3SubnetIP;
         };
       };
     };
@@ -131,10 +134,10 @@
         k3sArgs = {
           hostName = "k3sNode3";
           masterNode = masterNode;
-          masterIP = "10.10.3.216";
-          node1IP = "10.10.3.216";
-          node2IP = "10.10.1.6";
-          node3IP = "10.10.2.136";
+          masterIP = k3sNode1SubnetIP;
+          node1IP = k3sNode1SubnetIP;
+          node2IP = k3sNode2SubnetIP;
+          node3IP = k3sNode3SubnetIP;
         };
           #  masterNode = masterNode;
           #  masterIP = k3sNode1IP;
