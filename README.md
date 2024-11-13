@@ -15,6 +15,9 @@ This project is designed to provide a scalable and reproducible development envi
 
 To set up the environment, follow these steps:
 
+**Brand new Mac needs XCode installed and agreements accepted**
+**Setup git username and email**
+
 1. **TODO: document Nix installation**
 2. **TODO: document installation of direnv and running direnv allow**
 3. **TODO: document docker desktop and enabling k8s**
