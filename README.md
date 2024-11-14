@@ -22,3 +22,20 @@ To set up the environment, follow these steps:
 2. **TODO: document installation of direnv and running direnv allow**
 3. **TODO: document docker desktop and enabling k8s**
 4. **TODO: document NX workspace and plugin setup**
+
+**Running K8's:**
+
+Update etc/host file with the following addresses:
+```
+127.0.0.1       web-app-1.localhost
+127.0.0.1       web-app-2.localhost
+127.0.0.1       keycloak.localhost
+127.0.0.1       api.localhost
+```
+
+Run these commands:
+```
+task kubernetes:nginx-ingress-install
+task kubernetes:setup-local-cert
+task kubernetes:tilt:up
+```
