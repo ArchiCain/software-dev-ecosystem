@@ -1,7 +1,5 @@
 {
     "recommendations": [
-        "bbenoist.nix",
-        "ms-kubernetes-tools.vscode-kubernetes-tools",
-        "nrwl.angular-console"
+        "bbenoist.nix"
     ]
 }

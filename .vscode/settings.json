@@ -1,7 +1,0 @@
-{
-    "nxConsole.commonNxCommands": [
-        "run",
-        "run-many"
-    ],
-    "nxConsole.nxWorkspacePath": "typescript"
-}

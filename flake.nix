@@ -1,45 +1,50 @@
 {
+  description = "Monorepo Development Environment";
+
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    flake-utils,
-  }:
-    flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
-    in
-      with pkgs; {
-        devShells.default = mkShell {
-          buildInputs = [
-            nodejs_20 # Install the latest version of NodeJs
-            yarn # Yarn for package management
-            docker # Docker for containerization
-            kubectl # Kubernetes CLI tool
-            kubernetes-helm # Helm, a Kubernetes package manager
-            terraform # Infrustructure-as-Code (IaC) tool
-            go-task # Task for common commands
-            tilt # Add Tilt for Kubernetes dev workflow
-            liquibase # Add Liquibase for database migrations
-          ];
-          shellHook = ''
-            # Ensure Nx CLI is installed
-            if ! command -v nx > /dev/null; then
-              echo "Nx CLI not found. Installing globally via Yarn..."
-              yarn global add nx
-            else
-              echo "Nx CLI is already installed."
-            fi
+  outputs = { self, nixpkgs }: 
+  let
+    system = "x86_64-linux";
+    pkgs = import nixpkgs { inherit system; };
+  in {
+    devShells.default = pkgs.mkShell {
+      packages = with pkgs; [
+        ## Core utilities
+        nix
+        direnv
+        just
+        git
 
-            # Add Yarn global bin to PATH (for globally installed packages like nx)
-            export PATH="$(yarn global bin):$PATH"
-          '';
-        };
-      });
+        ## Kubernetes & Infrastructure
+        kubectl
+        minikube
+        terraform
+        helm
+
+        ## Documentation & Scaffolding
+        mkdocs
+        hygen
+        jq
+        envsubst
+      ];
+
+      shellHook = ''
+        # Load environment variables
+        export ENV=${ENV:-dev}
+        if [ -f .env.$ENV ]; then
+          export $(grep -v '^#' .env.$ENV | xargs)
+          echo "Loaded .env.$ENV"
+        else
+          echo "Warning: .env.$ENV not found, using default .env"
+          export $(grep -v '^#' .env | xargs)
+        fi
+
+        echo "🚀 Monorepo Dev Shell (ENV=$ENV)"
+        echo "💡 Use 'just help' to see available commands."
+      '';
+    };
+  };
 }
