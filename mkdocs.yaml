@@ -1,0 +1,6 @@
+site_name: Monorepo Documentation
+theme:
+  name: material
+
+nav:
+  - Home: index.md
