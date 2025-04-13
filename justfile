@@ -9,6 +9,7 @@ help:
     @echo "  just minikube-stop         - Stop Minikube without deleting"
     @echo "  just minikube-delete       - Delete Minikube cluster"
     @echo "  just docs                  - Start the MkDocs documentation server"
+    @echo "  just lens                  - Start lens"
 
 # Show environment variables
 env-show:
@@ -33,3 +34,14 @@ minikube-delete:
 docs:
     @echo "📖 Starting documentation server..."
     @mkdocs serve
+
+lens:
+    @echo "Starting lens"
+    @lens &
+
+# obs = observability
+obs-install:
+    cd kubernetes/observability && helmfile apply
+
+obs-destroy:
+    cd kubernetes/observability && helmfile destroy

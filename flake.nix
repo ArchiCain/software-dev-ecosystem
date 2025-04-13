@@ -32,6 +32,7 @@
             ## === KUBERNETES & INFRASTRUCTURE === ##
             kubectl  # CLI tool to interact with Kubernetes clusters
             kubernetes-helm  # Helm package manager for deploying applications in Kubernetes
+            helmfile # A templating system for helm
             minikube  # Local Kubernetes cluster for development/testing
             terraform  # Infrastructure as Code (IaC) tool for managing cloud infrastructure
             docker  # Container runtime for running and managing Docker containers
@@ -42,6 +43,14 @@
           ];
 
           shellHook = ''
+            # Install helm-diff plugin if it's not already installed
+            if ! helm plugin list | grep -q 'diff'; then
+              echo "Installing helm-diff plugin..."
+              helm plugin install https://github.com/databus23/helm-diff
+            else
+              echo "helm-diff plugin already installed"
+            fi
+
             # Set Minikube default driver to Docker
             minikube config set driver docker
 

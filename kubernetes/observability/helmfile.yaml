@@ -1,0 +1,28 @@
+repositories:
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
+  # - name: jaegertracing
+  #   url: https://jaegertracing.github.io/helm-charts
+  # - name: kubeshark
+  #   url: https://helm.kubeshark.co
+
+releases:
+  - name: prometheus
+    namespace: monitoring
+    createNamespace: true
+    chart: bitnami/prometheus
+
+  # - name: loki
+  #   namespace: logging
+  #   createNamespace: true
+  #   chart: bitnami/grafana-loki
+
+  # - name: jaeger
+  #   namespace: tracing
+  #   createNamespace: true
+  #   chart: jaegertracing/jaeger
+
+  # - name: kubeshark
+  #   namespace: kubeshark
+  #   createNamespace: true
+  #   chart: kubeshark/kubeshark

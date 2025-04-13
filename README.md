@@ -1,68 +1,66 @@
-# 🧪 Environment Setup Guide (Nix + direnv)
+# 🧪 Developer Environment Setup (Nix + direnv)
+
+This project uses a reproducible environment powered by **Nix Flakes**. Once installed, you'll have access to all required tools for local development and Kubernetes workflows.
+
+---
 
 ## ✅ Step 1: Install Nix
 
-Download and install Nix from the official site:  
-🔗 [https://nixos.org/download/](https://nixos.org/download/)
+Install Nix from the official site:  
+🔗 https://nixos.org/download/
 
-For macOS, run:
+For macOS:
 
-```bash
-sh <(curl -L https://nixos.org/nix/install)
-```
+    sh <(curl -L https://nixos.org/nix/install)
 
-> Once installed, **close your terminal** and open a **new terminal** to ensure the environment is properly refreshed.
+> After install, **restart your terminal**.
 
 ---
 
-## ✅ Step 2: Install direnv
+## ✅ Step 2: Install `direnv`
 
-Learn more:  
-🔗 [https://direnv.net/docs/installation.html](https://direnv.net/docs/installation.html)
+🔗 https://direnv.net/docs/installation.html
 
-For macOS (via Homebrew), run:
+    brew install direnv
 
-```bash
-brew install direnv
-```
+Then add the shell hook:
 
-### Add the Shell Hook
+### For Zsh (macOS default)
 
-Set up the shell hook for direnv.  
-For **zsh**, add this to your `~/.zshrc`:
-
-```bash
-eval "$(direnv hook zsh)"
-```
-
-Then restart your terminal or run:
-
-```bash
-source ~/.zshrc
-```
+    echo 'eval "$(direnv hook zsh)"' >> ~/.zshrc
+    source ~/.zshrc
 
 ---
 
-## ✅ Step 3: Enable direnv in the Project
+## ✅ Step 3: Enable the Dev Shell
 
-From your project root, run:
+From the project root:
 
-```bash
-direnv allow
-```
+    direnv allow
 
-This will allow `direnv` to load the environment defined in the `.envrc` file.
-
-> The `.envrc` contains `use flake`, which automatically starts your terminal in a **Nix flake shell** and activates all the dependencies defined in `flake.nix`.
+This will activate the Nix environment via the `.envrc` file.
 
 ---
 
-## ✅ Step 4: Open Project Documentation
+## ✅ Step 4: View the Full Project Documentation
 
-To view the project docs, run:
+To view the full docs (powered by **MkDocs**):
 
-```bash
-just docs
-```
+    just docs
 
-Then **Command-click** the URL shown in the terminal to open the docs in your default browser.
+> This will start the documentation server and print a URL like:  
+> `http://127.0.0.1:8000/`
+
+Click the link or open it in your browser to view full docs.
+
+---
+
+## 🧭 Next Steps
+
+After opening the docs, follow setup guides for:
+
+- Kubernetes (Minikube, Lens, kubectl, Helm)
+- Project directory layout and conventions
+- Running services with Tilt
+- Code generation tools
+- Database setup and migrations

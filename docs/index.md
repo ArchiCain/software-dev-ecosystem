@@ -1,20 +1,22 @@
-Explain the monorepo and the tools used:
+# 📘 Monorepo Overview
 
-nix
-direnv  # Automatically loads environment variables from `.envrc`
-just    # Task runner for defining and executing common commands
-yarn    # Preferred package manager over npm for managing JavaScript dependencies
-envsubst  # CLI tool for substituting environment variables in files
+Welcome to the monorepo documentation site. This site contains detailed guides and references for setting up and working with the developer workspace and associated projects.
 
-## === DATABASE MIGRATIONS === ##
-liquibase  # Database migration tool (used for schema versioning)
+---
 
-## === KUBERNETES & INFRASTRUCTURE === ##
-kubectl  # CLI tool to interact with Kubernetes clusters
-helm  # Helm package manager for deploying applications in Kubernetes
-minikube  # Local Kubernetes cluster for development/testing
-terraform  # Infrastructure as Code (IaC) tool for managing cloud infrastructure
-docker  # Container runtime for running and managing Docker containers
+## 📂 Documentation Sections
 
-## === DOCUMENTATION === ##
-mkdocs  # Static site generator for project documentation
+- [Environment](environment.md): Dev environment setup with Nix, direnv, and core tools
+- [Kubernetes](kubernetes.md): Local Kubernetes cluster using Minikube and Lens
+
+---
+
+## 🚀 Getting Started
+
+To set up your environment, start with the [Environment guide](environment.md).
+
+Once your tools are installed and Minikube is running, open this site via:
+
+    just docs
+
+Then use this site as your central reference for all projects and tooling.
